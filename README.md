@@ -1,90 +1,75 @@
 AnalogDots ML Engineer / Data Scientist Competency Assessment
 
-![alt text](https://img.shields.io/badge/Python-3.11+-blue.svg)
+Python Version
+Libraries
+Status
+Introduction & Project Goal
 
-![alt text](https://img.shields.io/badge/Libraries-Pandas%20%7C%20Scikit--learn%20%7C%20Streamlit-orange.svg)
+This repository contains a comprehensive solution for the AnalogDots competency assessment. The goal is to design and implement a data-driven system that provides tangible business value by:
 
-![alt text](https://img.shields.io/badge/Status-Completed-green.svg)
+    Building a personalized shoe recommendation engine.
 
-🎯 Introduction & Project Goal
+    Implementing business logic for customer-centric personalized services.
 
-This repository presents a comprehensive solution for the AnalogDots competency assessment. The primary goal is to design and implement a system that provides tangible business value through data. This is achieved via:
+    Creating an interactive web interface for demonstration.
 
-    A fully functional, personalized shoe recommendation engine.
+    Designing a scalable and efficient PostgreSQL database schema.
 
-    Business logic for data-driven customer services.
+Key Features
+Hybrid Recommendation Engine
 
-    An interactive web interface for demonstration.
+    Combines Collaborative Filtering (CF) and Content-Based Filtering (CBF) for diverse, relevant, and accurate shoe recommendations.
 
-    A scalable and efficient database schema.
+Interactive Web UI
 
-✨ Key Features
+    Built with Streamlit for real-time visualization of recommendations and personalized services.
 
-    ✅ Hybrid Recommendation Engine: Combines Collaborative and Content-Based filtering for accurate, diverse, and relevant shoe recommendations.
+Proactive Personalized Services
 
-    ✅ Interactive Web UI: A user-friendly web application built with Streamlit to visualize recommendations and personalized services in real-time.
+    Smart Care Notifications: Remind users how to care for their shoes to boost longevity and loyalty.
 
-    ✅ Proactive Personalized Services:
+    Automated Replacement Suggestions: Detects when shoes near end-of-life and recommends similar replacements to drive repeat sales.
 
-        Smart Care Notifications: Reminds users how to care for their shoes to increase product longevity and customer loyalty.
+Scalable Database Design
 
-        Automated Replacement Suggestions: Drives repeat sales by identifying when a user's shoes are nearing their end-of-life and recommending similar replacements.
+    A normalized PostgreSQL schema optimized for performance and future feature expansion.
 
-    ✅ Scalable Database Design: A well-normalized PostgreSQL schema designed for performance and future feature expansion.
+Technical Deep Dive
+1. Recommendation Algorithm: Hybrid Approach
 
-🚀 Technical Deep Dive
-1. The Recommendation Algorithm: A Hybrid Approach
-
-To provide the best possible recommendations, a Hybrid Model was chosen, fusing two powerful techniques:
 Collaborative Filtering (CF)
 
-    How it Works: Analyzes the behavior of all users to find others with similar tastes. It then recommends shoes that these "similar users" have liked.
+    Uses Singular Value Decomposition (SVD) to analyze user-item interactions and discover latent features.
 
-    Implementation: Singular Value Decomposition (SVD), a matrix factorization technique, is used to uncover latent features in the user-item interaction data.
-
-    Strength: Excellent for discovering new and unexpected items (serendipity).
+    Great for serendipitous and novel recommendations.
 
 Content-Based Filtering (CBF)
 
-    How it Works: Recommends items based on their inherent attributes. If a user likes a "Nike running shoe," it will recommend other shoes with similar characteristics.
+    Utilizes TF-IDF Vectorizer to convert shoe attributes into vectors and Cosine Similarity to find similar items.
 
-    Implementation: A TF-IDF Vectorizer converts shoe attributes into numerical vectors, and Cosine Similarity measures the likeness between any two shoes.
+    Solves the cold-start problem and provides explainable recommendations.
 
-    Strength: Solves the "cold-start" problem for new shoes and provides highly relevant, explainable recommendations.
+Hybrid Model
 
-Why a Hybrid Model?
+    Combines CF and CBF results with a weighted average for better accuracy, diversity, and robustness.
 
-By combining these two models with a weighted average, the system gets the best of both worlds. It mitigates the weaknesses of each individual model, leading to higher accuracy, better diversity, and a more robust solution overall.
 2. Personalized Service Logic
 
-Beyond just recommending what to buy, the system is designed to engage users throughout their product ownership lifecycle.
-Service 1: Proactive Care Notifications
+    Care Notifications: Triggered based on purchase history and sends shoe-specific care tips after a set period (e.g., 30 days).
 
-    Objective: Increase customer lifetime value and brand loyalty.
-
-    Logic: The system checks a user's purchase history. After a set period (e.g., 30 days), it triggers a notification containing the specific care_instructions for their purchased shoe.
-
-    Business Value: This simple, helpful nudge shows that the brand cares about the customer post-purchase, building trust and engagement.
-
-Service 2: Shoe Replacement Suggestions
-
-    Objective: Drive timely, relevant, and repeat sales.
-
-    Logic: Each shoe has an estimated lifespan_days. The system calculates the shoe's "end-of-life" date based on the purchase date. As this date approaches, it leverages the Content-Based Filtering model to find and recommend shoes that are stylistically similar to the one wearing out.
-
-    Business Value: This creates a highly targeted sales opportunity, making it frictionless for a customer to repurchase a product they already love or a close alternative.
+    Replacement Suggestions: Calculates shoe lifespan and recommends replacements using the content-based model as the end-of-life approaches.
 
 3. Database Schema Design (schema.sql)
 
-The database is designed for a production environment using PostgreSQL. The schema is normalized, scalable, and built to support the recommendation and personalization features.
+    Designed for production use with PostgreSQL.
 
-    Normalization: Data is organized into distinct tables (users, shoes, interactions) to reduce redundancy and ensure data integrity.
+    Fully normalized tables (users, shoes, interactions) reduce redundancy.
 
-    Performance: Critical columns like user_id and shoe_id in the interactions table are indexed to ensure lightning-fast lookups, which is essential for real-time recommendations.
+    Indexed columns for efficient real-time lookups.
 
-    Future-Proofing: The schema includes tables and columns (user_shoe_care, environmental_data, lifespan_days) to support more advanced features in the future.
+    Supports future features with additional tables and columns (e.g., user_shoe_care, environmental_data, lifespan_days).
 
-🛠️ Technology Stack
+Technology Stack
 
     Language: Python 3.11+
 
@@ -92,11 +77,11 @@ The database is designed for a production environment using PostgreSQL. The sche
 
     Web Framework: Streamlit
 
-    Database: PostgreSQL (schema design)
+    Database: PostgreSQL
 
     Version Control: Git & GitHub
 
-⚙️ Setup and Execution
+Setup and Execution
 Prerequisites
 
     Git
@@ -104,5 +89,37 @@ Prerequisites
     Python 3.10+
 
 Step 1: Clone the Repository
+git clone https://github.com/YourUsername/your-repo-name.git
+cd your-repo-name
+Step 2: Set Up a Virtual Environment
+# Create virtual environment
+python -m venv venv
 
-Open your terminal and run the following command:
+# Activate it
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+Step 3: Install Required Libraries
+streamlit run app.py
+The app will open in your default browser. You can select different users and explore personalized recommendations and services.
+
+Project Structure
+.
+├── app.py                   # Main Streamlit app
+├── schema.sql               # PostgreSQL database schema
+├── requirements.txt         # Python dependencies
+├── README.md                # This file
+├── .gitignore               # Git ignore rules
+│
+├── data/                    # Synthetic CSV datasets
+│   ├── interactions.csv
+│   ├── shoes.csv
+│   └── users.csv
+│
+└── recommendation_system/   # Backend logic package
+    ├── __init__.py
+    ├── data_loader.py       # Data loading & preprocessing
+    ├── recommender.py       # HybridRecommender class
+    ├── personalized_services.py # Care & replacement logic
+    └── main.py              # CLI execution script
