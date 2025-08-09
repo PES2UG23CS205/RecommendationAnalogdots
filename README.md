@@ -8,16 +8,18 @@ AnalogDots ML Engineer / Data Scientist Competency Assessment
 
 ![alt text](https://img.shields.io/badge/Status-Completed-green.svg)
 
-This repository contains a comprehensive solution for the AnalogDots competency assessment. It features a fully functional, personalized shoe recommendation engine, logic for data-driven customer services, an interactive web interface, and a scalable database schema.
-🎥 Live Demo
+🎯 Introduction & Project Goal
 
-Click the thumbnail below to watch a video demonstration of the project, including a walkthrough of the live Streamlit application and an explanation of the underlying logic.
+This repository presents a comprehensive solution for the AnalogDots competency assessment. The primary goal is to design and implement a system that provides tangible business value through data. This is achieved via:
 
-![alt text](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)
+    A fully functional, personalized shoe recommendation engine.
 
+    Business logic for data-driven customer services.
 
-<p align="center">👆 Replace this link with your actual YouTube video link! 👆</p>
-(Note: The placeholder image will update automatically when you insert your valid YouTube link.)
+    An interactive web interface for demonstration.
+
+    A scalable and efficient database schema.
+
 ✨ Key Features
 
     ✅ Hybrid Recommendation Engine: Combines Collaborative and Content-Based filtering for accurate, diverse, and relevant shoe recommendations.
@@ -32,45 +34,32 @@ Click the thumbnail below to watch a video demonstration of the project, includi
 
     ✅ Scalable Database Design: A well-normalized PostgreSQL schema designed for performance and future feature expansion.
 
-🏛️ System Architecture
-
-The system follows a simple, robust architecture for an interactive demonstration:
-code Code
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-[ User ] <--> [ 🌐 Streamlit Web App ] <--> [ 🧠 Recommendation & Service Logic ] <--> [ 📄 CSV Data Files ]
-
-    
-
-In a production environment, the CSV data files would be replaced by the designed PostgreSQL database.
 🚀 Technical Deep Dive
 1. The Recommendation Algorithm: A Hybrid Approach
 
-To provide the best possible recommendations, I chose a Hybrid Model that fuses two powerful techniques:
+To provide the best possible recommendations, a Hybrid Model was chosen, fusing two powerful techniques:
+Collaborative Filtering (CF)
 
-    Collaborative Filtering (CF):
+    How it Works: Analyzes the behavior of all users to find others with similar tastes. It then recommends shoes that these "similar users" have liked.
 
-        How it Works: This model analyzes the behavior of all users to find others with similar tastes. It then recommends shoes that these "similar users" have liked.
+    Implementation: Singular Value Decomposition (SVD), a matrix factorization technique, is used to uncover latent features in the user-item interaction data.
 
-        Implementation: I used Singular Value Decomposition (SVD), a matrix factorization technique, to uncover latent features in the user-item interaction data. This allows for powerful predictions even for shoes a user has never seen.
+    Strength: Excellent for discovering new and unexpected items (serendipity).
 
-        Strength: Excellent for discovering new and unexpected items (serendipity).
+Content-Based Filtering (CBF)
 
-    Content-Based Filtering (CBF):
+    How it Works: Recommends items based on their inherent attributes. If a user likes a "Nike running shoe," it will recommend other shoes with similar characteristics.
 
-        How it Works: This model recommends items based on their inherent attributes. If a user has purchased a "Nike running shoe made of mesh," it will recommend other shoes with similar characteristics.
+    Implementation: A TF-IDF Vectorizer converts shoe attributes into numerical vectors, and Cosine Similarity measures the likeness between any two shoes.
 
-        Implementation: I used a TF-IDF Vectorizer to convert shoe attributes (brand, type, material) into numerical vectors, and then Cosine Similarity to measure the likeness between any two shoes.
+    Strength: Solves the "cold-start" problem for new shoes and provides highly relevant, explainable recommendations.
 
-        Strength: Solves the "cold-start" problem for new shoes and provides highly relevant, explainable recommendations.
+Why a Hybrid Model?
 
-Why Hybrid?
 By combining these two models with a weighted average, the system gets the best of both worlds. It mitigates the weaknesses of each individual model, leading to higher accuracy, better diversity, and a more robust solution overall.
 2. Personalized Service Logic
 
-Beyond just recommending what to buy next, the system is designed to engage users throughout their product ownership lifecycle.
+Beyond just recommending what to buy, the system is designed to engage users throughout their product ownership lifecycle.
 Service 1: Proactive Care Notifications
 
     Objective: Increase customer lifetime value and brand loyalty.
@@ -119,14 +108,14 @@ The database is designed for a production environment using PostgreSQL. The sche
 
     Version Control: Git & GitHub.
 
-SETUP AND EXECUTION
+⚙️ Setup and Execution
 Prerequisites
 
     Git
 
     Python 3.10+
 
-1. Clone the Repository
+Step 1: Clone the Repository
 
 Open your terminal and run the following command:
 code Bash
@@ -139,8 +128,8 @@ cd your-repo-name
 
     
 
-(Replace YourUsername and your-repo-name with your actual repository details)
-2. Set Up a Virtual Environment
+(Replace with your actual repository details)
+Step 2: Set Up a Virtual Environment
 
 It is highly recommended to use a virtual environment to manage dependencies.
 code Bash
@@ -159,7 +148,7 @@ source venv/bin/activate
 
     
 
-3. Install Required Libraries
+Step 3: Install Required Libraries
 code Bash
 IGNORE_WHEN_COPYING_START
 IGNORE_WHEN_COPYING_END
@@ -169,7 +158,7 @@ pip install -r requirements.txt
 
     
 
-4. Run the Streamlit Web Application
+Step 4: Run the Streamlit Web Application
 
 This command will start the local web server and open the application in your browser.
 code Bash
@@ -190,18 +179,21 @@ IGNORE_WHEN_COPYING_END
       
 .
 ├── app.py                   # The main Streamlit web application script
-├── data/                    # Contains the synthetic CSV datasets
+├── schema.sql               # The PostgreSQL database schema design
+├── requirements.txt         # List of Python dependencies for pip
+├── README.md                # This file
+├── .gitignore               # Specifies files for Git to ignore
+│
+└───data/                    # Contains the synthetic CSV datasets
 │   ├── interactions.csv
 │   ├── shoes.csv
 │   └── users.csv
-├── recommendation_system/   # Core Python module for all backend logic
-│   ├── __init__.py
-│   ├── data_loader.py       # Loads and preprocesses data
-│   ├── recommender.py       # Contains the HybridRecommender class
-│   ├── personalized_services.py # Logic for care/replacement services
-│   └── main.py              # Original command-line execution script
-├── README.md                # This file
-├── requirements.txt         # List of Python dependencies
-└── schema.sql               # The PostgreSQL database schema design
+│
+└───recommendation_system/   # Core Python module for all backend logic
+    ├── __init__.py          # Makes the folder a Python package
+    ├── data_loader.py       # Function to load and preprocess data
+    ├── recommender.py       # Contains the HybridRecommender class
+    ├── personalized_services.py # Logic for care/replacement services
+    └── main.py              # Original script for command-line execution
 
     
