@@ -2,9 +2,7 @@ AnalogDots ML Engineer / Data Scientist Competency Assessment
 
 ![alt text](https://img.shields.io/badge/Python-3.11+-blue.svg)
 
-
 ![alt text](https://img.shields.io/badge/Libraries-Pandas%20%7C%20Scikit--learn%20%7C%20Streamlit-orange.svg)
-
 
 ![alt text](https://img.shields.io/badge/Status-Completed-green.svg)
 
@@ -84,29 +82,19 @@ The database is designed for a production environment using PostgreSQL. The sche
 
     Performance: Critical columns like user_id and shoe_id in the interactions table are indexed to ensure lightning-fast lookups, which is essential for real-time recommendations.
 
-    Future-Proofing:
-
-        The shoes table includes columns like care_instructions and lifespan_days to directly power the personalized services.
-
-        A user_shoe_care table is included to potentially track user care actions, making notifications even smarter in a future version.
-
-        An environmental_data table is designed to support future context-aware features (e.g., "It's raining in your area, consider these waterproof boots.").
+    Future-Proofing: The schema includes tables and columns (user_shoe_care, environmental_data, lifespan_days) to support more advanced features in the future.
 
 🛠️ Technology Stack
 
     Language: Python 3.11+
 
-    Core Libraries:
+    Core Libraries: Pandas, NumPy, Scikit-learn
 
-        Pandas & NumPy: For data manipulation and numerical operations.
+    Web Framework: Streamlit
 
-        Scikit-learn: For implementing the Content-Based and Collaborative Filtering models (TF-IDF, Cosine Similarity, SVD).
+    Database: PostgreSQL (schema design)
 
-    Web Framework: Streamlit for creating the interactive user interface.
-
-    Database: PostgreSQL (schema design).
-
-    Version Control: Git & GitHub.
+    Version Control: Git & GitHub
 
 ⚙️ Setup and Execution
 Prerequisites
@@ -118,82 +106,3 @@ Prerequisites
 Step 1: Clone the Repository
 
 Open your terminal and run the following command:
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-git clone https://github.com/YourUsername/your-repo-name.git
-cd your-repo-name
-
-    
-
-(Replace with your actual repository details)
-Step 2: Set Up a Virtual Environment
-
-It is highly recommended to use a virtual environment to manage dependencies.
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-# Create the virtual environment
-python -m venv venv
-
-# Activate it
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-
-    
-
-Step 3: Install Required Libraries
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-pip install -r requirements.txt
-
-    
-
-Step 4: Run the Streamlit Web Application
-
-This command will start the local web server and open the application in your browser.
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-streamlit run app.py
-
-    
-
-You can now interact with the application, select different users, and see their personalized results!
-📂 Project Structure
-code Code
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-.
-├── app.py                   # The main Streamlit web application script
-├── schema.sql               # The PostgreSQL database schema design
-├── requirements.txt         # List of Python dependencies for pip
-├── README.md                # This file
-├── .gitignore               # Specifies files for Git to ignore
-│
-└───data/                    # Contains the synthetic CSV datasets
-│   ├── interactions.csv
-│   ├── shoes.csv
-│   └── users.csv
-│
-└───recommendation_system/   # Core Python module for all backend logic
-    ├── __init__.py          # Makes the folder a Python package
-    ├── data_loader.py       # Function to load and preprocess data
-    ├── recommender.py       # Contains the HybridRecommender class
-    ├── personalized_services.py # Logic for care/replacement services
-    └── main.py              # Original script for command-line execution
-
-    
