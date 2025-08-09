@@ -4,8 +4,8 @@
 ### 🎥 Project Demonstration
 **A complete video walkthrough of the project, code, and a live demo of the Streamlit application can be found at the link below.**
 
-### **[>>> CLICK HERE FOR THE VIDEO DEMONSTRATION <<<](https://your-youtube-video-link-here.com)**
-*(Please replace the link above with your actual unlisted YouTube video URL)*
+### **[>>> CLICK HERE FOR THE VIDEO DEMONSTRATION <<<](https://your-video-link-from-youtube-or-google-drive.com)**
+*(Please replace the URL above with your actual link from YouTube/Google Drive after uploading your OBS recording.)*
 ---
 
 ## Project Overview
