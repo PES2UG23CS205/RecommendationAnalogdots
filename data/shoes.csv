@@ -1,0 +1,9 @@
+shoe_id,brand,model,type,material,color,care_instructions,lifespan_days
+101,Nike,Air Max 90,Running,Mesh,White,"Wipe with a damp cloth; avoid machine wash",365
+102,Adidas,Ultraboost,Running,Knit,Black,"Gentle machine wash cold; air dry",400
+103,Vans,Old Skool,Skate,Canvas,Black,"Use a brush and mild soap; air dry",300
+104,Converse,Chuck Taylor,Casual,Canvas,White,"Machine wash on gentle cycle; remove laces",350
+105,Dr. Martens,1460,Boot,Leather,Black,"Use leather conditioner; polish regularly",1000
+106,New Balance,990v5,Running,Suede,Gray,"Use a suede brush; avoid water",500
+107,Gucci,Ace,Luxury,Leather,White,"Professional cleaning recommended",730
+108,Nike,Air Force 1,Casual,Leather,White,"Wipe clean; use shoe protector spray",500
