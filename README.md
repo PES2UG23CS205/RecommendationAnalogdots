@@ -1,125 +1,121 @@
-📋 Problem Description
+# AnalogDots ML Engineer / Data Scientist Competency Assessment
 
-This project aims to develop an intelligent system that provides personalized shoe recommendations and tailored services to users. By leveraging user interaction data, shoe attributes, and user profiles, the system moves beyond generic suggestions to create a deeply personal and engaging customer experience. The goal is to improve user satisfaction, drive sales, and build brand loyalty through smart, data-driven features.
-🚀 Project Objective
+---
+### 🎥 Project Demonstration
+**A complete video walkthrough of the project, code, and live Streamlit demo can be found here:**
 
-    Build a robust deep learning model capable of recommending shoes based on a hybrid of user behavior and product attributes.
+**[>>> YOUR PUBLIC/UNLISTED YOUTUBE VIDEO LINK HERE <<<]**
+---
 
-    Design and outline the logic for personalized services, such as proactive care notifications and timely replacement suggestions.
+## Project Overview
 
-    Develop a scalable and efficient database schema to support the data requirements of the recommendation and personalization systems.
+This repository contains my submission for the AnalogDots competency assessment. The project implements a hybrid shoe recommendation system, outlines logic for personalized user services, and includes a scalable database schema design. The entire system is demonstrated through an interactive web application.
 
-    Create an interactive web application to clearly demonstrate the project's functionality and business value.
+This solution achieves its goal through a three-pronged approach:
 
-📊 Dataset
+1.  **A Hybrid Recommendation Algorithm:** Combines the strengths of collaborative and content-based filtering to provide relevant and diverse suggestions.
+2.  **Personalized Service Logic:** Defines two key services—Proactive Care Notifications and Shoe Replacement Suggestions—to enhance user engagement and drive repeat purchases.
+3.  **A Scalable Data Infrastructure:** A well-designed PostgreSQL schema that efficiently stores the necessary data and is built for future growth.
 
-For initial development and testing, a synthetic dataset located in the /data directory is used. This dataset simulates real-world data streams and consists of three files:
+## 1. Recommendation Algorithm Design
 
-    users.csv: Contains user profiles, including ID, age, gender, and primary_usage.
+### Chosen Algorithm: Hybrid (Collaborative Filtering + Content-Based Filtering)
 
-    shoes.csv: Represents the product catalog with attributes like brand, type, material, and specialized fields for personalized services (care_instructions, lifespan_days).
+I chose a hybrid approach because it provides the most robust and practical solution, overcoming the limitations of using a single algorithm.
 
-    interactions.csv: A log of weighted user actions (view, add_to_wishlist, purchase), which forms the basis for the behavioral analysis.
+*   **Collaborative Filtering (CF) via SVD:** This technique is based on user-item interactions. It identifies users with similar tastes and recommends items that similar users have liked. I used **Singular Value Decomposition (SVD)**, a powerful matrix factorization method, to uncover latent factors in the user-item interaction matrix. This helps in predicting a user's preference for a shoe they haven't interacted with yet.
+*   **Content-Based Filtering (CBF) via TF-IDF & Cosine Similarity:** This technique recommends items based on their attributes. It finds shoes that are similar to those a user has shown interest in before. I used **TF-IDF** to vectorize shoe attributes (brand, type, material) and **Cosine Similarity** to calculate the similarity between shoes. This method is excellent for solving the "cold start" problem for new shoes and providing explainable recommendations ("Because you liked Nike Running shoes...").
 
-📈 Solution Approach
+### Rationale & How It Addresses the Problem
 
-The project is executed through a series of structured steps, from data modeling to deployment.
+The hybrid model combines the scores from both CF and CBF using a weighted average: `Final_Score = (w_cf * CF_Score) + (w_cbf * CBF_Score)`.
 
-    Data Modeling & Schema Design
+*   **Benefits:**
+    *   **Reduces Cold-Start Problem:** If a user or item is new, CF struggles. The content-based component can still provide sensible recommendations.
+    *   **Increases Diversity & Serendipity:** CF can find unexpected but relevant items (serendipity), while CBF ensures recommendations are grounded in the user's known preferences.
+    *   **Improves Accuracy:** The combination of signals (user behavior + item attributes) leads to more accurate and satisfying recommendations than either model alone.
 
-        Design a normalized PostgreSQL schema with tables for users, shoes, and interactions.
+## 2. Personalized Service Logic
 
-        Include columns that directly support business logic (e.g., lifespan_days).
+I have designed the logic for two personalized service features. The implementation is detailed in `recommendation_system/personalized_services.py`.
 
-        Add indexes on foreign keys (user_id, shoe_id) for performance at scale.
+### Service 1: Proactive Care Notifications
 
-    Recommendation Algorithm (Hybrid Model)
+*   **Objective:** To increase customer lifetime value and brand loyalty by helping users maintain their purchases.
+*   **Logic:**
+    1.  **Trigger:** A user has purchased a shoe.
+    2.  **Action:** After a set period (e.g., 30 days post-purchase), the system sends a notification.
+    3.  **Content:** The notification includes the specific `care_instructions` for that shoe model, pulled directly from our shoe data.
+    4.  **Business Value:** This simple, helpful nudge shows that AnalogDots cares about the customer post-purchase, building trust and engagement.
 
-        Collaborative Filtering: Use SVD (Singular Value Decomposition) on the user-item interaction matrix to capture latent user tastes.
+### Service 2: Shoe Replacement Suggestions
 
-        Content-Based Filtering: Use TF-IDF and Cosine Similarity on shoe attributes to find items similar to a user's known preferences.
+*   **Objective:** To drive repeat sales by proactively suggesting replacements for worn-out shoes.
+*   **Logic:**
+    1.  **Trigger:** A purchased shoe is nearing its estimated end of life. This is calculated as `purchase_date + lifespan_days`.
+    2.  **Action:** The system identifies that the shoe might need replacing.
+    3.  **Content:** It then generates a list of recommended replacements. **Crucially, these recommendations are generated using the content-based similarity model**, suggesting shoes that are very similar in style, brand, and type to the one being replaced.
+    4.  **Business Value:** This creates a timely and highly relevant sales opportunity, making it easy for the customer to buy a similar pair they are likely to love.
 
-        Combine the scores from both models using a weighted average for a final, robust recommendation.
+## 3. Interactive Web Application (Streamlit Demo)
 
-    Personalized Service Logic
+To provide a tangible and user-friendly way to demonstrate the system's capabilities, this project includes an interactive web application built with Streamlit. This moves beyond simple console output and allows an evaluator to experience the personalization engine in real-time.
 
-        Care Notifications: Create logic that triggers a notification with care instructions a set time after a purchase.
+**Key Features of the App:**
+*   **User Selection:** A dropdown menu in the sidebar allows for the selection of any user from the dataset.
+*   **Dynamic Generation:** A "Generate My Feed" button triggers the recommendation and personalization logic for the selected user.
+*   **Clear Layout:** The results are presented in a clean, multi-column layout:
+    *   **Shoe Recommendations:** The output of the hybrid recommender is displayed in a clear table.
+    *   **Personalized Services:** Notifications for proactive care and shoe replacements are shown with distinct styling to mimic a real user feed.
+*   **User Experience:** Loading spinners provide feedback to the user while the backend models are running, ensuring a smooth experience.
 
-        Replacement Suggestions: Develop logic that identifies when a shoe is nearing its estimated end-of-life and suggests similar items as replacements.
+This web interface serves as the primary method for demonstrating the functionality of the implemented algorithms and business logic.
 
-    Demonstration
+## 4. Database Schema Design
 
-        Build an interactive web application using Streamlit to provide a user-friendly interface for the system.
+The database schema is defined in `schema.sql`. It is designed for PostgreSQL.
 
-        Allow users to be selected to view their unique, personalized recommendations and service messages.
+### Design Rationale:
 
-⚙️ Technologies Used
+*   **Normalization:** The schema is normalized to reduce data redundancy and improve data integrity. For instance, user and shoe information are stored in separate tables (`users`, `shoes`) and linked in the `interactions` table using foreign keys.
+*   **Scalability & Performance:**
+    *   **Indexing:** I've added indices on frequently queried columns, such as `interactions(user_id)`. This is critical for fast lookups when generating recommendations.
+    *   **Data Types:** Appropriate data types are used (e.g., `TIMESTAMPTZ` for time-aware data).
+*   **Support for Personalization:**
+    *   The `shoes` table includes `care_instructions` and `lifespan_days`, which directly feed the personalized services.
+    *   I've included `user_shoe_care` and `environmental_data` tables to demonstrate forward-thinking design for future, more advanced features.
 
-    Python 3.9+
+## 5. Synthetic Dataset
 
-    TensorFlow / Keras (or in our case, Scikit-learn & SciPy for the recommender)
+The synthetic dataset is located in the `/data` folder and simulates real-world data needed to power the system. It consists of `shoes.csv`, `users.csv`, and `interactions.csv`.
 
-    Pandas & NumPy (for data manipulation)
+## 6. Setup and How to Run
 
-    Streamlit (for the web application)
+1.  **Clone the repository:**
+    ```bash
+    git clone <your_repo_link>
+    cd analogdots-recommender-assessment
+    ```
 
-    Jupyter Notebook (can be used for prototyping, though not in the final structure)
+2.  **Set up a virtual environment (recommended):**
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+    ```
 
-💡 Results
+3.  **Install the required libraries:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-    The Hybrid Model successfully generates relevant recommendations, mitigating the cold-start problem inherent in single-algorithm systems.
+4.  **Run the Streamlit Web Application:**
+    This is the primary way to view the project's output. It will open a new tab in your web browser with the interactive demo.
+    ```bash
+    streamlit run app.py
+    ```
 
-    The Personalized Service Logic provides a clear framework for features that enhance user engagement and drive business value.
-
-    The final Streamlit application serves as an effective proof-of-concept, demonstrating the real-world application of the system in a user-friendly manner.
-
-    These results demonstrate the feasibility and power of using a multi-faceted, data-driven approach to create a superior customer experience.
-
-▶️ How to Run
-
-    Clone the repository
-    code Bash
-
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-git clone https://github.com/your-username/your-repository-name.git
-cd your-repository-name
-
-    
-
-Set up and activate a virtual environment
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-# Create
-python -m venv venv
-# Activate (Windows)
-venv\Scripts\activate
-# Activate (macOS/Linux)
-source venv/bin/activate
-
-    
-
-Install dependencies
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-pip install -r requirements.txt
-
-    
-
-Run the Streamlit App
-code Bash
-IGNORE_WHEN_COPYING_START
-IGNORE_WHEN_COPYING_END
-
-      
-streamlit run app.py
-
-    
+5.  **(Optional) Run the original command-line script:**
+    If you wish to see the original console output, you can still run the `main.py` script.
+    ```bash
+    python recommendation_system/main.py
+    ```
