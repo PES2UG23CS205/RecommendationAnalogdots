@@ -80,46 +80,35 @@ Technology Stack
     Database: PostgreSQL
 
     Version Control: Git & GitHub
-
 Setup and Execution
-Prerequisites
-
-    Git
-
-    Python 3.10+
-
 Step 1: Clone the Repository
+
 git clone https://github.com/YourUsername/your-repo-name.git
 cd your-repo-name
-Step 2: Set Up a Virtual Environment
-# Create virtual environment
+
+(Replace with your actual repository details)
+Step 2: Create and Activate a Virtual Environment
+Create virtual environment
+
 python -m venv venv
 
-# Activate it
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-Step 3: Install Required Libraries
-streamlit run app.py
-The app will open in your default browser. You can select different users and explore personalized recommendations and services.
+Activate it
 
-Project Structure
-.
-├── app.py                   # Main Streamlit app
-├── schema.sql               # PostgreSQL database schema
-├── requirements.txt         # Python dependencies
-├── README.md                # This file
-├── .gitignore               # Git ignore rules
-│
-├── data/                    # Synthetic CSV datasets
-│   ├── interactions.csv
-│   ├── shoes.csv
-│   └── users.csv
-│
-└── recommendation_system/   # Backend logic package
-    ├── __init__.py
-    ├── data_loader.py       # Data loading & preprocessing
-    ├── recommender.py       # HybridRecommender class
-    ├── personalized_services.py # Care & replacement logic
-    └── main.py              # CLI execution script
+    On Windows:
+
+venv\Scripts\activate
+
+    On macOS/Linux:
+
+source venv/bin/activate
+
+Step 3: Install Required Libraries
+
+pip install -r requirements.txt
+
+Step 4: Run the Streamlit Web Application
+
+streamlit run app.py
+
+The app will open in your default browser. You can now select different users and explore personalized recommendations and services.
+
